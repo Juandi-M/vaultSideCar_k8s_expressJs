@@ -1,0 +1,49 @@
+kubernetes-project/
+│
+├── assets/                           # Or config-files/
+│   ├── nginx/
+│   │   ├── nginx_headers.conf
+│   │   ├── web-app-proxy.conf
+│   │   └── vhost.d/
+│   │           ├── default_location
+│   │
+│   ├── vault/
+│   │    ├── appconfigs.ctmpl
+│   │    ├── role-id
+│   │    ├── secret-id
+│   │    ├── vault-agent.hcl
+│   │    └── ...                       # any other Vault-related configurations
+│
+├── manifests/                        
+│   ├── configmaps/
+│   │   ├── nginx/
+│   │   │   └── nginx-proxy-configmap.yaml
+│   │   ├── vault-agent/
+│   │   │   └── vault-agent-configmap.yaml
+│   │   └── ...
+│   │
+│   ├── deployments/
+│   │   ├── nginx-proxy-deployment.yaml
+│   │   ├── vault-agent-deployment.yaml
+│   │   └── web-app-render-deployment.yaml
+│   │
+│   ├── persistent/
+│   │   ├── node-modules-pvc.yaml
+│   │
+│   ├── services/
+│   │   ├── nginx-proxy-service.yaml
+│   │   ├── vault-agent-service.yaml
+│   │   └── ...
+│   │
+│   └── volumes/
+│       └── node-modules-pv.yaml
+│
+└── README.md
+
+
+│   ├── namespaces/
+│   │   ├── production-namespace.yaml
+│   │   ├── staging-namespace.yaml
+│   │   └── ...
+└── README.md
+

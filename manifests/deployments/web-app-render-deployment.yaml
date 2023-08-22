@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app-render
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-app-render
+  template:
+    metadata:
+      labels:
+        app: web-app-render
+    spec:
+      containers:
+      - name: web-app-render
+        image: bacus/webjsvaultproject:1
+        ports:
+        - containerPort: 3001

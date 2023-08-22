@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-proxy
+  template:
+    metadata:
+      labels:
+        app: nginx-proxy
+    spec:
+      containers:
+      - name: nginx-proxy
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-conf
+          mountPath: /etc/nginx/conf.d/
+        - name: nginx-headers
+          mountPath: /etc/nginx/nginx_headers.conf
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          periodSeconds: 60
+          failureThreshold: 3
+      volumes:
+      - name: nginx-conf
+        hostPath:
+          path: /path/on/host/nginx/web-app-proxy.conf
+      - name: nginx-headers
+        hostPath:
+          path: /path/on/host/nginx/nginx_headers.conf

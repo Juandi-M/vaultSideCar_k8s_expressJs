@@ -14,6 +14,11 @@ data:
           proxy_set_header Connection 'upgrade';
           proxy_set_header Host $host;
           proxy_cache_bypass $http_upgrade;
+
+          # Disable unused HTTP methods
+          if ($request_method !~ ^(GET|HEAD|POST)$ ) {
+              return 405;
+          }
       }
 
       include /etc/nginx/vhost.d/*;
@@ -31,11 +36,6 @@ data:
 
     # Limit the request rate
     limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;
-
-    # Disable unused HTTP methods
-    if ($request_method !~ ^(GET|HEAD|POST)$ ) {
-        return 405;
-    }
 
     # Limit Request Size
     client_max_body_size 5M;
@@ -60,5 +60,5 @@ data:
 
         include /etc/nginx/vhost.d/*;
     }
-  vhost.d/default_location: |
+  vhost.d.default_location: |
     location /robots.txt {return 200 "User-agent: *\nDisallow: /\n";}

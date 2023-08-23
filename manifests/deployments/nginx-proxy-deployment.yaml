@@ -18,10 +18,15 @@ spec:
         ports:
         - containerPort: 80
         volumeMounts:
-        - name: nginx-conf
+        - name: nginx-config-volume
           mountPath: /etc/nginx/conf.d/
-        - name: nginx-headers
-          mountPath: /etc/nginx/nginx_headers.conf
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+          requests:
+            cpu: "500m"
+            memory: "256Mi"
         livenessProbe:
           httpGet:
             path: /
@@ -30,10 +35,13 @@ spec:
           timeoutSeconds: 5
           periodSeconds: 60
           failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
       volumes:
-      - name: nginx-conf
-        hostPath:
-          path: /path/on/host/nginx/web-app-proxy.conf
-      - name: nginx-headers
-        hostPath:
-          path: /path/on/host/nginx/nginx_headers.conf
+      - name: nginx-config-volume
+        configMap:
+          name: nginx-proxy-configmap

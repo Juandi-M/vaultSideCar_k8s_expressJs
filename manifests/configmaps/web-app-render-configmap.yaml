@@ -3,8 +3,14 @@ kind: ConfigMap
 metadata:
   name: web-app-config
 data:
-  # Add your configuration data here
-  SOME_ENV_VAR: "value"
-  another-config-file.conf: |
-    key1=value1
-    key2=value2
+  appconfigs.json: |
+    {
+      "value1": "Greetings, compatriots!",
+      "value2": "Marcus Tullius Cicero",
+      "value3": "56",
+      "value4": "Rome",
+      "value5": "In the heart of the empire, our legacy lives on",
+      "value6": "hardcoded value in ctmpl",
+      "value7": "hardcoded value in ctmpl",
+      "value8": "hardcoded value in ctmpl"
+    }

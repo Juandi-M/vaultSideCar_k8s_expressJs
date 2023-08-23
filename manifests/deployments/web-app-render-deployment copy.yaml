@@ -11,7 +11,14 @@ spec:
     metadata:
       labels:
         app: web-app-render
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "web-app-render"
+        vault.hashicorp.com/agent-inject-secret-appconfigs.json: "devops/kv/vault-templating-poc"
+        vault.hashicorp.com/agent-inject-template-appconfigs.json: |
+          {{ with secret "devops/kv/vault-templating-poc" }}{{ .Data.data | toJSONPretty }}{{ end }}
     spec:
+      serviceAccountName: web-app-render
       containers:
       - name: web-app-render
         image: bacus/webjsvaultproject:latest
@@ -24,25 +31,11 @@ spec:
           requests:
             cpu: "500m"
             memory: "256Mi"
-        livenessProbe:
-          httpGet:
-            path: /healthcheck 
-            port: 3001
-          initialDelaySeconds: 60
-          timeoutSeconds: 5
-          periodSeconds: 60
-          failureThreshold: 3
-        readinessProbe:
-          httpGet:
-            path: /healthcheck 
-            port: 3001
-          initialDelaySeconds: 10
-          periodSeconds: 5
         volumeMounts:
-        - name: web-app-config-volume
-          mountPath: /app/configs/appconfigs.json
-          subPath: appconfigs.json
+        - name: vault-template-configmap
+          mountPath: /vault/secrets
+          readOnly: true
       volumes:
-      - name: web-app-config-volume
+      - name: vault-template-configmap
         configMap:
-          name: web-app-config
+          name: vault-template-configmap

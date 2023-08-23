@@ -40,7 +40,7 @@ spec:
           periodSeconds: 5
         volumeMounts:
         - name: web-app-config-volume
-          mountPath: /app/appconfigs.json
+          mountPath: /app/configs/appconfigs.json
           subPath: appconfigs.json
       volumes:
       - name: web-app-config-volume

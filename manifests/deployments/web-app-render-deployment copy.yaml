@@ -24,7 +24,20 @@ spec:
           requests:
             cpu: "500m"
             memory: "256Mi"
-        # livenessProbe and readinessProbe sections removed
+        livenessProbe:
+          httpGet:
+            path: /healthcheck 
+            port: 3001
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          periodSeconds: 60
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /healthcheck 
+            port: 3001
+          initialDelaySeconds: 10
+          periodSeconds: 5
         volumeMounts:
         - name: web-app-config-volume
           mountPath: /app/configs/appconfigs.json

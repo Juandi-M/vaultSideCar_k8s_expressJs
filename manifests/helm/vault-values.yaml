@@ -1,0 +1,4 @@
+server:
+  enabled: false
+injector:
+  enabled: true

@@ -2,15 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-app
-  annotations:
-    vault.hashicorp.com/agent-inject: "true" # Enables the Vault Agent Sidecar Injector for this deployment.
-    vault.hashicorp.com/role: "web-app" # Specifies the Vault role to be used for authentication by the Vault Agent.
-    vault.hashicorp.com/agent-inject-secret-appconfigs.json: "devops/kv/vault-templating-poc" # Defines the path in Vault where the secret is stored that will be injected into the pod.
-    vault.hashicorp.com/agent-template-file: "appconfigs.json.tpl" # Specifies the template file name that will be used to render the secret.
-    vault.hashicorp.com/agent-template-configmap: "web-app-vault-template-configmap" # Specifies the ConfigMap containing the template file for rendering the secret.
-    vault.hashicorp.com/agent-template-wait-min: "15s" # Minimum time to wait before re-rendering the template if the secret changes.
-    vault.hashicorp.com/agent-template-wait-max: "5m" # Maximum time to wait before re-rendering the template if the secret changes.
-    vault.hashicorp.com/agent-inject-template-file: "/app/configs/appconfigs.json"# Specifies the destination path inside the container where the rendered file will be placed.
 spec:
   replicas: 1
   selector:
@@ -20,6 +11,15 @@ spec:
     metadata:
       labels:
         app: web-app
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "web-app"
+        vault.hashicorp.com/agent-inject-secret-appconfigs.json: "devops/kv/vault-templating-poc"
+        vault.hashicorp.com/agent-template-file: "appconfigs.json.tpl"
+        vault.hashicorp.com/agent-template-configmap: "web-app-vault-template-configmap"
+        vault.hashicorp.com/agent-template-wait-min: "15s"
+        vault.hashicorp.com/agent-template-wait-max: "5m"
+        vault.hashicorp.com/agent-inject-template-file: "/app/configs/appconfigs.json"
     spec:
       serviceAccountName: vault-auth
       containers:
@@ -34,11 +34,3 @@ spec:
             requests:
               cpu: "500m"
               memory: "256Mi"
-          volumeMounts:
-            - name: web-app-vault-template-configmap
-              mountPath: /vault/secrets
-              readOnly: true
-      volumes:
-        - name: web-app-vault-template-configmap
-          configMap:
-            name: web-app-vault-template-configmap

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: vault-template-configmap
+  name: web-app-render-vault-template-configmap
 data:
   appconfigs.json.tpl: |
     {{- with secret "devops/kv/vault-templating-poc" -}}

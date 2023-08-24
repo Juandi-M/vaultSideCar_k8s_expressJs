@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-app-render
+  annotations:
+    vault.hashicorp.com/agent-inject-secret-appconfigs.json: "devops/kv/vault-templating-poc"
 spec:
   replicas: 1
   selector:
@@ -11,12 +13,6 @@ spec:
     metadata:
       labels:
         app: web-app-render
-      annotations:
-        vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/role: "web-app-render"
-        vault.hashicorp.com/agent-inject-secret-appconfigs.json: "devops/kv/vault-templating-poc"
-        vault.hashicorp.com/agent-inject-template-appconfigs.json: |
-          {{ with secret "devops/kv/vault-templating-poc" }}{{ .Data.data | toJSONPretty }}{{ end }}
     spec:
       serviceAccountName: web-app-render
       containers:
@@ -32,10 +28,10 @@ spec:
             cpu: "500m"
             memory: "256Mi"
         volumeMounts:
-        - name: vault-template-configmap
+        - name: web-app-render-vault-template-configmap
           mountPath: /vault/secrets
           readOnly: true
       volumes:
-      - name: vault-template-configmap
+      - name: web-app-render-vault-template-configmap
         configMap:
-          name: vault-template-configmap
+          name: web-app-render-vault-template-configmap

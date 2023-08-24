@@ -2,3 +2,6 @@ server:
   enabled: false
 injector:
   enabled: true
+global:
+  vault:
+    address: https://hcvault-sandbox.llm-aws.com:8200/

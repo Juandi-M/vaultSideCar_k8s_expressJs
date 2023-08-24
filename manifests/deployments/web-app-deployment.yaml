@@ -1,22 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-app-render
+  name: web-app
   annotations:
+    vault.hashicorp.com/agent-inject: "true"
+    vault.hashicorp.com/role: "web-app"
     vault.hashicorp.com/agent-inject-secret-appconfigs.json: "devops/kv/vault-templating-poc"
+    vault.hashicorp.com/agent-template-file: "appconfigs.json.tpl"
+    vault.hashicorp.com/agent-template-configmap: "web-app-vault-template-configmap"
+    vault.hashicorp.com/agent-template-wait-min: "5s"
+    vault.hashicorp.com/agent-template-wait-max: "5m"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: web-app-render
+      app: web-app
   template:
     metadata:
       labels:
-        app: web-app-render
+        app: web-app
     spec:
-      serviceAccountName: web-app-render
+      serviceAccountName: web-app
       containers:
-      - name: web-app-render
+      - name: web-app
         image: bacus/webjsvaultproject:latest
         ports:
         - containerPort: 3001
@@ -28,10 +34,10 @@ spec:
             cpu: "500m"
             memory: "256Mi"
         volumeMounts:
-        - name: web-app-render-vault-template-configmap
+        - name: web-app-vault-template-configmap
           mountPath: /vault/secrets
           readOnly: true
       volumes:
-      - name: web-app-render-vault-template-configmap
+      - name: web-app-vault-template-configmap
         configMap:
-          name: web-app-render-vault-template-configmap
+          name: web-app-vault-template-configmap

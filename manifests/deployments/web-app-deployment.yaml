@@ -8,7 +8,7 @@ metadata:
     vault.hashicorp.com/agent-inject-secret-appconfigs.json: "devops/kv/vault-templating-poc"
     vault.hashicorp.com/agent-template-file: "appconfigs.json.tpl"
     vault.hashicorp.com/agent-template-configmap: "web-app-vault-template-configmap"
-    vault.hashicorp.com/agent-template-wait-min: "5s"
+    vault.hashicorp.com/agent-template-wait-min: "15s"
     vault.hashicorp.com/agent-template-wait-max: "5m"
 spec:
   replicas: 1

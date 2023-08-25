@@ -1,19 +1,25 @@
 kubernetes_project
 |
+├── ClusterOps.sh
 ├── assets/
-│   ├── web_app_render_policy.hcl
+│   ├── myapp-policy.hcl
+|
+├── configure_vault_sidecar.sh
+├── helm/
+│   ├── deploy-vault-helm.sh
+│   ├── vault-values.yaml
 |
 ├── manifests/
 │   ├── configmaps/
-│   │   ├── nginx_proxy_configmap.yaml
-│   │   ├── web_app_vault_template_configmap.yaml
+│   │   ├── nginx-proxy-configmap.yaml
+│   │   ├── web-app-vault-template-configmap.yaml
 │   ├── deployments/
-│   │   ├── nginx_proxy_deployment.yaml
-│   │   ├── web_app_deployment.yaml
+│   │   ├── nginx-proxy-deployment.yaml
+│   │   ├── web-app-deployment.yaml
 │   ├── loadbalancer/
-│   │   ├── nginx_proxy_loadbalancer.yaml
+│   │   ├── nginx-proxy-loadbalancer.yaml
 │   ├── service/
-│   │   ├── nginx_proxy_service.yaml
-│   │   ├── web_app_render_service.yaml
+│   │   ├── nginx-proxy-service.yaml
+│   │   ├── web-app-service.yaml
 |
 └── visualmap.ascii

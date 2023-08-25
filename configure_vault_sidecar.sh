@@ -34,13 +34,20 @@ vault write auth/kubernetes/role/$ROLE_NAME \
     policies=web-app-render-policy \
     ttl=24h
 
-# Step 5: Add the Vault Sidecar to Your Deployment
-# Assuming app-deployment.yaml is already created with the specified content
-kubectl apply -f app-deployment.yaml
+# Step 5: Verify the Integration
+# Find the appropriate pod name containing the Vault sidecar container
+POD_NAME=$(kubectl get pods -n $NAMESPACE -l app=web-app -o jsonpath='{.items[0].metadata.name}')
 
-# Step 6: Verify the Integration
-# Replace <POD_NAME> with the appropriate pod name
-kubectl logs <POD_NAME> -c vault-agent
+# Check if the pod name was found
+if [ -z "$POD_NAME" ]; then
+  echo "Error: Unable to find the appropriate pod for verification."
+  exit 1
+fi
+
+# Retrieve the logs from the Vault sidecar container
+kubectl logs $POD_NAME -c vault-agent -n $NAMESPACE
+
+echo "Verification completed. Check the logs above for details."
 
 echo "You've successfully integrated the Vault sidecar injector into your Kubernetes application."
 

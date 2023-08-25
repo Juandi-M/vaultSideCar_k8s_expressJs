@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Script Name: ClusterOps.sh
+# Author: Juan Monge
+# Description: Deploy or destroy of k8s objects (yamls)
+
 readonly yaml_files=(
     "manifests/configmaps/nginx-proxy-configmap.yaml"
     "manifests/configmaps/web-app-vault-template-configmap.yaml"

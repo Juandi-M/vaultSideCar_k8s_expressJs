@@ -53,3 +53,16 @@ else
     echo "Invalid choice. Please choose 'd' to delete the resources defined in YAML files or 'r' to redeploy YAML files."
     exit 1
 fi
+
+# Conclusion Step
+echo "--------------------------------------------------"
+echo "Cluster Operations Completed Successfully!"
+echo "--------------------------------------------------"
+echo "Here's what has been done:"
+echo "1. Applied or deleted Kubernetes manifests based on your selection."
+echo "2. Configured or removed Nginx proxy, web application, and other resources."
+echo ""
+echo "Next Steps:"
+echo "1. Verify the deployment by running 'kubectl get pods' and other inspection commands."
+echo "2. If you've deployed new resources, consider running the configure_vault_sidecar.sh configuration script next."
+echo "--------------------------------------------------"

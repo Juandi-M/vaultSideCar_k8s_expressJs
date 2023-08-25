@@ -8,8 +8,8 @@ This guide provides a comprehensive step-by-step walkthrough for configuring and
 ## Step 1: Configure Vault Sidecar with Kubernetes Authentication
 
 
-## PROJECT MAP
-
+## Project Map
+```
 kubernetes_project
 |
 ├── ClusterOps.sh
@@ -35,6 +35,7 @@ kubernetes_project
 │   │   ├── web-app-service.yaml
 |
 └── visualmap.ascii
+```
 
 This step involves setting up Kubernetes authentication with Vault and integrating the Vault Sidecar Injector.
 

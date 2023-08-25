@@ -15,11 +15,11 @@ spec:
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/role: "web-app"
         vault.hashicorp.com/agent-inject-secret-appconfigs.json: "devops/kv/vault-templating-poc"
-        vault.hashicorp.com/agent-template-file: "appconfigs.json.tpl"
         vault.hashicorp.com/agent-template-configmap: "web-app-vault-template-configmap"
+        vault.hashicorp.com/agent-template-file: "appconfigs.json.tpl"
+        vault.hashicorp.com/agent-inject-template-file: "/app/configs/appconfigs.json"
         vault.hashicorp.com/agent-template-wait-min: "15s"
         vault.hashicorp.com/agent-template-wait-max: "5m"
-        vault.hashicorp.com/agent-inject-template-file: "/app/configs/appconfigs.json"
     spec:
       serviceAccountName: vault-auth
       containers:

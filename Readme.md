@@ -1,12 +1,6 @@
-
----
-
 # Project Execution Guide
 
-This guide provides a comprehensive step-by-step walkthrough for configuring and deploying the project. Follow the instructions below to set up the environment and deploy the necessary components.
-
-## Step 1: Configure Vault Sidecar with Kubernetes Authentication
-
+This guide provides a comprehensive step-by-step walkthrough for configuring and deploying the VaultSideCar Injector. Follow the instructions below to set up the environment and deploy the necessary components.
 
 ## Project Map
 ```
@@ -36,6 +30,8 @@ kubernetes_project
 |
 └── visualmap.ascii
 ```
+
+## Step 1: Configure Vault Sidecar with Kubernetes Authentication
 
 This step involves setting up Kubernetes authentication with Vault and integrating the Vault Sidecar Injector.
 
@@ -105,5 +101,3 @@ kubectl logs <pod_name>
 - **Inspect Pods**: Check the status of the deployed pods to ensure they are running.
 - **Inspect Services and Load Balancers**: Verify the services and load balancers are properly configured.
 - **Check Logs**: Review the logs of the deployed containers for any errors or warnings.
-
----

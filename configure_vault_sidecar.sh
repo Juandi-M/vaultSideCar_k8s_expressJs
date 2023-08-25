@@ -11,10 +11,10 @@ kubectl get configmap -n kube-system extension-apiserver-authentication -o=jsonp
 
 # Step 2: Kubernetes Service Account
 NAMESPACE="default" # Replace with the desired namespace
-kubectl create serviceaccount vault-auth -n $NAMESPACE
+kubectl create serviceaccount vault-auth -n $NAMESPACE || echo "Service account 'vault-auth' already exists. Continuing..."
 
 # Step 3: Configure Kubernetes Authentication in Vault
-export VAULT_ADDR='YOUR_VAULT_URL' # Replace with your Vault URL
+
 TOKEN_REVIEWER_JWT=$(kubectl get secret $(kubectl get serviceaccount vault-auth -o jsonpath='{.secrets[0].name}') -o jsonpath='{.data.token}' | base64 --decode)
 vault write auth/kubernetes/config \
     token_reviewer_jwt="$TOKEN_REVIEWER_JWT" \
@@ -48,7 +48,6 @@ fi
 kubectl logs $POD_NAME -c vault-agent -n $NAMESPACE
 
 echo "Verification completed. Check the logs above for details."
-
 echo "You've successfully integrated the Vault sidecar injector into your Kubernetes application."
 
 # Conclusion: Your application can now securely access secrets stored in HashiCorp Vault

@@ -3,6 +3,7 @@
 This guide provides a comprehensive step-by-step walkthrough for configuring and deploying the VaultSideCar Injector. Follow the instructions below to set up the environment and deploy the necessary components.
 
 ## Project Map
+
 ```
 kubernetes_project
 |
@@ -31,9 +32,29 @@ kubernetes_project
 └── visualmap.ascii
 ```
 
-## Step 1: Configure Vault Sidecar with Kubernetes Authentication
+## Step 1: Deploy or Destroy Kubernetes Objects (including Nginx Proxy and Web Application)
 
+This step involves deploying or destroying Kubernetes objects such as the Nginx proxy and web application.
+
+### Execution:
+
+```bash
+./ClusterOps.sh
+```
+
+### Details:
+
+- **Redeploy YAML Files**: Applies the defined YAML files to redeploy pods, services, ingresses, and configmaps.
+- **Delete Resources**: Deletes the resources defined in the YAML files.
+- **User Prompt**: Asks the user whether to delete or redeploy the resources.
+
+## Step 2: Configure Vault Sidecar with Kubernetes Authentication
 This step involves setting up Kubernetes authentication with Vault and integrating the Vault Sidecar Injector.
+
+### Set up you local Vault env
+
+1. connect to vpn
+2. export VAULT_ADDR=https://hcvault-sandbox.llm-aws.com:8200/ # Replace with your Vault Server URL
 
 ### Execution:
 
@@ -50,7 +71,7 @@ This step involves setting up Kubernetes authentication with Vault and integrati
 - **Create a Role in Vault**: Binds the service account to the policy and sets a time-to-live (TTL).
 - **Verify the Integration**: Checks the logs from the Vault sidecar container to verify the integration.
 
-## Step 2: Deploy Vault using Helm
+## Step 3: Deploy Vault using Helm
 
 This step involves deploying Vault using Helm, including adding the HashiCorp Helm repository and managing the Vault Helm release.
 
@@ -65,22 +86,6 @@ This step involves deploying Vault using Helm, including adding the HashiCorp He
 - **Add and Update HashiCorp Helm Repository**: Ensures the HashiCorp Helm repository is added and updated.
 - **Check Vault Helm Installation Status**: Verifies the status of the existing Vault Helm installation.
 - **Deploy or Redeploy Vault Helm**: Installs or reinstalls the Vault Helm release based on the provided values file.
-
-## Step 3: Deploy or Destroy Kubernetes Objects (including Nginx Proxy and Web Application)
-
-This step involves deploying or destroying Kubernetes objects such as the Nginx proxy and web application.
-
-### Execution:
-
-```bash
-./ClusterOps.sh
-```
-
-### Details:
-
-- **Redeploy YAML Files**: Applies the defined YAML files to redeploy pods, services, ingresses, and configmaps.
-- **Delete Resources**: Deletes the resources defined in the YAML files.
-- **User Prompt**: Asks the user whether to delete or redeploy the resources.
 
 ## Step 4: Verify the Deployment
 

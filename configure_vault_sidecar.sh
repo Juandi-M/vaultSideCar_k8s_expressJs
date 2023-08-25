@@ -34,20 +34,18 @@ vault write auth/kubernetes/role/$ROLE_NAME \
     policies=web-app-render-policy \
     ttl=24h
 
-# Step 5: Verify the Integration
-# Find the appropriate pod name containing the Vault sidecar container
-POD_NAME=$(kubectl get pods -n $NAMESPACE -l app=web-app -o jsonpath='{.items[0].metadata.name}')
-
-# Check if the pod name was found
-if [ -z "$POD_NAME" ]; then
-  echo "Error: Unable to find the appropriate pod for verification."
-  exit 1
-fi
-
-# Retrieve the logs from the Vault sidecar container
-kubectl logs $POD_NAME -c vault-agent -n $NAMESPACE
-
-echo "Verification completed. Check the logs above for details."
-echo "You've successfully integrated the Vault sidecar injector into your Kubernetes application."
-
-# Conclusion: Your application can now securely access secrets stored in HashiCorp Vault
+#  Step 5 Conclusion:
+echo "--------------------------------------------------"
+echo "Configuration and Integration Completed Successfully!"
+echo "--------------------------------------------------"
+echo "Here's what has been configured and integrated:"
+echo "1. Kubernetes API Server URL and CA certificate have been obtained."
+echo "2. A Kubernetes service account named 'vault-auth' has been created."
+echo "3. Kubernetes authentication has been configured in Vault."
+echo "4. A Vault policy named '$POLICY_NAME' has been created."
+echo "5. A Vault role named '$ROLE_NAME' has been created and bound to the service account."
+echo ""
+echo "Next Steps:"
+echo "1. Verify the integration by checking the logs from the Vault sidecar container in your Kubernetes application."
+echo "2. Run no the helm installation of the injector: deploy-vault-helm.sh."
+echo "--------------------------------------------------"

@@ -22,16 +22,16 @@ vault write auth/kubernetes/config \
     kubernetes_ca_cert=@$HOME/ca.crt
 
 # Step 3: Create a Vault Policy
-POLICY_NAME="myapp-policy"
+POLICY_NAME="juan-web-poc-policy"  
 echo "path \"devops/kv/vault-templating-poc/*\" { capabilities = [\"read\"] }" > $POLICY_NAME.hcl
 vault policy write $POLICY_NAME $POLICY_NAME.hcl
 
 # Step 4: Create a Role in Vault
-ROLE_NAME="web-app-render"
+ROLE_NAME="juan-web-poc-policy"
 vault write auth/kubernetes/role/$ROLE_NAME \
     bound_service_account_names=vault-auth \
     bound_service_account_namespaces=$NAMESPACE \
-    policies=web-app-render-policy \
+    policies=policies=juan-web-poc-policy\
     ttl=24h
 
 #  Step 5 Conclusion:

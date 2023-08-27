@@ -13,7 +13,7 @@ spec:
         app: web-app
       annotations:
         vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/role: "web-app"
+        vault.hashicorp.com/role: "juan-web-poc-policy"
         vault.hashicorp.com/agent-inject-secret-appconfigs.json: "devops/kv/vault-templating-poc"
         vault.hashicorp.com/agent-template-configmap: "web-app-vault-template-configmap"
         vault.hashicorp.com/agent-template-file: "appconfigs.json.tpl"

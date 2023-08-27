@@ -2,6 +2,12 @@ server:
   enabled: false
 injector:
   enabled: true
+  extraVolumes:
+    - type: 'secret'
+      name: 'custom-ca-secret'  # Replace with the actual secret name containing your CA
+      path: '/etc/vault/tls'  # Path where the secret will be mounted
+  extraArgs:
+    vault-cacert: '/etc/vault/tls/ca.crt'  # Path to the CA certificate
 global:
   vault:
     address: http://vault:8200

@@ -14,6 +14,7 @@ spec:
       annotations:
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/role: "juan-web-poc-role"
+        vault.hashicorp.com/agent-inject-address: https://hcvault-sandbox.llm-aws.com:8200/
         vault.hashicorp.com/agent-inject-secret-appconfigs.json: "devops/kv/vault-templating-poc"
         vault.hashicorp.com/agent-template-configmap: "web-app-vault-template-configmap"
         vault.hashicorp.com/agent-template-file: "appconfigs.json.tpl"

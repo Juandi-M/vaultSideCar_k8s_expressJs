@@ -1,3 +1,1 @@
-path "devops/kv/vault-templating-poc/*" {
-  capabilities = ["read"]
-}
+path "devops/kv/vault-templating-poc/*" { capabilities = ["read"] }

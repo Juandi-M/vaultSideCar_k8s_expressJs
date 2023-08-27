@@ -20,7 +20,10 @@ create_service_account() {
     kubectl create serviceaccount vault-auth -n $NAMESPACE || echo "Service account 'vault-auth' already exists. Continuing..."
 }
 
-create_service_account
+if ! create_service_account; then
+  echo "Failed to create service account. Exiting."
+  exit 1
+fi
 
 # Step 3: Configure Kubernetes Authentication in Vault
 get_token_reviewer_jwt() {
@@ -43,7 +46,12 @@ configure_kubernetes_authentication "$TOKEN_REVIEWER_JWT" "$KUBERNETES_HOST" "$H
 
 # Step 4: Create a Vault Policy
 POLICY_NAME="juan-web-poc-policy"
-VAULT_POLICY_FILE="/assets/$POLICY_NAME.hcl"
+VAULT_POLICY_FILE="./assets/$POLICY_NAME.hcl"
+
+if [ ! -f "$VAULT_POLICY_FILE" ]; then
+  echo "Vault policy file not found at $VAULT_POLICY_FILE. Exiting."
+  exit 1
+fi
 
 create_vault_policy() {
     local policy_name="$1"
@@ -92,4 +100,6 @@ if [ $? -eq 0 ]; then
     echo "1. Verify the integration by checking the logs from the Vault sidecar container in your Kubernetes application."
     echo "2. Run the Helm installation of the injector: deploy-vault-helm.sh."
     echo "--------------------------------------------------"
+else
+    echo "An error occurred during the configuration. Please check the logs for details."
 fi

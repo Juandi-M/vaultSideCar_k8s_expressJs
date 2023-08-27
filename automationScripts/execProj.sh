@@ -26,7 +26,7 @@ run_script() {
   
   if [ "$script_name" == "ClusterOps.sh" ]; then
     echo "r" | ./"$script_name" >> "$LOG_FILE" 2>&1 # Run script and redirect output to log file
-  elif [ "$script_name" == "helm/deploy-vault-helm.sh" ]; then
+  elif [ "$script_name" == "helm/deployVaultHelm.sh" ]; then
     echo "2" | ./"$script_name" >> "$LOG_FILE" 2>&1 # Run script and redirect output to log file
   else
     ./"$script_name" >> "$LOG_FILE" 2>&1 # Run script and redirect output to log file

@@ -12,26 +12,30 @@ spec:
       labels:
         app: web-app
       annotations:
-        vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/role: "juan-web-poc-role"
-        vault.hashicorp.com/agent-inject-secret-appconfigs.json: "devops/kv/vault-templating-poc"
-        vault.hashicorp.com/agent-template-configmap: "web-app-vault-template-configmap"
-        vault.hashicorp.com/agent-template-file: "appconfigs.json.tpl"
-        vault.hashicorp.com/agent-inject-template-file: "/app/configs/appconfigs.json"
-        vault.hashicorp.com/agent-template-wait-min: "15s"
-        vault.hashicorp.com/agent-template-wait-max: "5m"
-        vault.hashicorp.com/agent-inject-status: "update"
+        vault.hashicorp.com/agent-inject: 'true' 
+        vault.hashicorp.com/role: 'juan-vault-web-poc'  
+        vault.hashicorp.com/agent-inject-status: 'update'  
+        vault.hashicorp.com/auth-path: 'auth/kubernetes'  
+        vault.hashicorp.com/namespace: 'default' 
+        # vault.hashicorp.com/agent-injector-tls-skip-verify: "true"
     spec:
-      serviceAccountName: vault-auth
+      serviceAccountName: juan-vault-web-poc  
       containers:
-        - name: web-app
-          image: bacus/webjsvaultproject:latest
-          ports:
-            - containerPort: 3001
-          resources:
-            limits:
-              cpu: "1"
-              memory: "512Mi"
-            requests:
-              cpu: "500m"
-              memory: "256Mi"
+      - name: web-app
+        image: bacus/webjsvaultproject:latest
+        ports:
+        - containerPort: 3001
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+          requests:
+            cpu: "500m"
+            memory: "256Mi"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /vault/configs
+      volumes:
+      - name: config-volume
+        configMap:
+          name: web-app-vault-template-configmap

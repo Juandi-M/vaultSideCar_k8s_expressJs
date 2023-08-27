@@ -5,13 +5,13 @@
 # Description: Deploy or destroy of k8s objects (yamls)
 
 readonly yaml_files=(
-    "manifests/configmaps/nginx-proxy-configmap.yaml"
-    "manifests/configmaps/web-app-vault-template-configmap.yaml"
-    "manifests/deployments/nginx-proxy-deployment.yaml"
-    "manifests/deployments/web-app-deployment.yaml"
-    "manifests/loadbalancer/nginx-proxy-loadbalancer.yaml"
-    "manifests/service/nginx-proxy-service.yaml"
-    "manifests/service/web-app-service.yaml"
+    "../manifests/configmaps/nginx-proxy-configmap.yaml"
+    "../manifests/configmaps/web-app-vault-template-configmap.yaml"
+    "../manifests/deployments/nginx-proxy-deployment.yaml"
+    "../manifests/deployments/web-app-deployment.yaml"
+    "../manifests/loadbalancer/nginx-proxy-loadbalancer.yaml"
+    "../manifests/service/nginx-proxy-service.yaml"
+    "../manifests/service/web-app-service.yaml"
     # Remove or correct the following line
     # "manifests/ingress/nginx-proxy-ingress.yaml"
 )

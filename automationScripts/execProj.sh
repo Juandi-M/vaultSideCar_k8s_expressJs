@@ -52,7 +52,7 @@ fi
 
 run_script "ClusterOps.sh" # Run ClusterOps.sh script
 run_script "configure-vault-auth-and-roles.sh" # Run configure-vault-auth-and-roles.sh script
-run_script "helm/deploy-vault-helm.sh" # Run helm/deploy-vault-helm.sh script
+run_script "deploy-vault-helm.sh" # Run helm/deploy-vault-helm.sh script
 
 echo "All selected scripts ran successfully."
 echo "Script ended at $(date)" >> "$LOG_FILE" # Log script end time

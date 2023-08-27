@@ -15,7 +15,7 @@ deploy_helm() {
   helm repo update
 
   # Deploy Vault Helm chart
-  if helm upgrade --install vault hashicorp/vault -f helm-vault-injector-deployement.yaml -n $NAMESPACE; then
+  if helm upgrade --install vault hashicorp/vault -f ../helm/helm-vault-injector-deployement.yaml -n $NAMESPACE; then
     echo "Vault Helm chart deployed successfully."
   else
     echo "Vault Helm chart deployment failed."

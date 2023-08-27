@@ -47,7 +47,7 @@ configure_kubernetes_authentication "$TOKEN_REVIEWER_JWT" "$KUBERNETES_HOST" "$H
 
 # Step 4: Create a Vault Policy
 POLICY_NAME="juan-web-poc-policy"
-VAULT_POLICY_FILE="../assets/$POLICY_NAME.hcl"
+VAULT_POLICY_FILE="./vaultPolicy/juan-web-poc-policy.hcl"
 
 if [ ! -f "$VAULT_POLICY_FILE" ]; then
   echo "Vault policy file not found at $VAULT_POLICY_FILE. Exiting."

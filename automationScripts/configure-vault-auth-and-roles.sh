@@ -96,7 +96,7 @@ if [ $? -eq 0 ]; then
     echo "3. Kubernetes authentication has been configured in Vault."
     echo "4. A Vault policy named '$POLICY_NAME' has been created."
     echo "5. A Vault role named '$ROLE_NAME' has been created and bound to the service account."
-    echo ""
+    echo "$ROLE_NAME" "vault-auth - " "- $NAMESPACE - " "- $POLICY_NAME -" "24h"
     echo "Next Steps:"
     echo "1. Verify the integration by checking the logs from the Vault sidecar container in your Kubernetes application."
     echo "2. Run the Helm installation of the injector: deploy-vault-helm.sh."

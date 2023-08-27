@@ -12,8 +12,7 @@ readonly yaml_files=(
     "../manifests/loadbalancer/nginx-proxy-loadbalancer.yaml"
     "../manifests/service/nginx-proxy-service.yaml"
     "../manifests/service/web-app-service.yaml"
-    # Remove or correct the following line
-    # "manifests/ingress/nginx-proxy-ingress.yaml"
+    # "../manifests/secrets/vault-auth.yaml"
 )
 
 # Function to redeploy YAML files

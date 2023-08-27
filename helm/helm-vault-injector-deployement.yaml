@@ -1,9 +1,12 @@
+server:
+  enabled: false
+
 injector:
   namespaces: ["default"]
   config:
     vault_addr: https://hcvault-sandbox.llm-aws.com:8200
   serviceAccountName: vault-auth
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:

@@ -6,6 +6,9 @@
 
 export VAULT_ADDR='https://hcvault-sandbox.llm-aws.com:8200/'
 
+# Get the directory of the current script
+SCRIPT_DIR=$(dirname "$0")
+
 # Step 1: Obtain Kubernetes Information
 get_kubernetes_api_server_url() {
     kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'
@@ -47,7 +50,7 @@ configure_kubernetes_authentication "$TOKEN_REVIEWER_JWT" "$KUBERNETES_HOST" "$H
 
 # Step 4: Create a Vault Policy
 POLICY_NAME="juan-web-poc-policy"
-VAULT_POLICY_FILE="./vaultPolicy/juan-web-poc-policy.hcl"
+VAULT_POLICY_FILE="$SCRIPT_DIR/../vaultPolicy/$POLICY_NAME.hcl"
 
 if [ ! -f "$VAULT_POLICY_FILE" ]; then
   echo "Vault policy file not found at $VAULT_POLICY_FILE. Exiting."
@@ -58,7 +61,7 @@ create_vault_policy() {
     local policy_name="$1"
     local vault_policy_file="$2"
 
-    vault policy write "$policy_name" @"$vault_policy_file"
+    vault policy write "$policy_name" "$vault_policy_file"
 }
 
 create_vault_policy "$POLICY_NAME" "$VAULT_POLICY_FILE"

@@ -17,7 +17,6 @@ echo "Installing Vault..."
 EXTERNAL_VAULT_ADDR="hcvault-sandbox.llm-aws.com"  # Set your actual External Vault Address
 helm install vault hashicorp/vault \
   --set "injector.externalVaultAddr=https://$EXTERNAL_VAULT_ADDR:8200" \
-  # --set "tlsDisable=true" \
   --set='server.enabled=false'
 
 # Wait for a few seconds to make sure the injector pod is getting deployed

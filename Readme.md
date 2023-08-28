@@ -106,3 +106,64 @@ kubectl logs <pod_name>
 - **Inspect Pods**: Check the status of the deployed pods to ensure they are running.
 - **Inspect Services and Load Balancers**: Verify the services and load balancers are properly configured.
 - **Check Logs**: Review the logs of the deployed containers for any errors or warnings.
+
+Certainly! Here's the complete guide, covering how to install ngrok, run it against a specific port, and how to query the Kubernetes API server address on a Mac.
+
+---
+
+# Query Kubernetes API Server Address
+
+1. Open a new Terminal window.
+
+2. Run the following command to get the API server address:
+
+```bash
+kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'
+```
+
+3. The command will return the Kubernetes API server address, for example:
+
+```bash
+https://127.0.0.1:6443
+```
+
+You can use this address for configurations that require the Kubernetes API server address, such as setting up Vault or other third-party services.
+
+
+# Ngrok Installation and Configuration Guide for Mac
+
+## Install Homebrew (if not already installed)
+
+1. Open a new Terminal window.
+
+2. Run the following command to install Homebrew:
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+3. Follow the on-screen instructions to complete the installation.
+
+## Install Ngrok
+
+1. After installing Homebrew, install ngrok by running:
+
+```bash
+brew install ngrok
+```
+
+## Run Ngrok
+
+1. To run ngrok against a specific port (e.g., 6443), open a new Terminal window and type:
+
+```bash
+ngrok http 6443
+```
+
+2. This will give you a public URL that forwards to your local server. Look for a line like:
+
+```text
+Forwarding https://your-ngrok-subdomain.ngrok.io -> http://localhost:6443
+```
+
+3. Note down the public URL (e.g., `https://your-ngrok-subdomain.ngrok.io`); you'll use this for configurations.

@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alpine-vault-pod
+spec:
+  serviceAccountName: juan-vault-web-poc
+  containers:
+  - name: alpine-vault-container
+    image: alpine
+    securityContext:
+      capabilities:
+        add:
+          - ALL
+    command: ["/bin/sh", "-c"]
+    args:
+    - |
+      apk update &&
+      apk add curl &&
+      apk add jq && # Adding jq installation here
+      apk add --no-cache vault &&
+      export VAULT_ADDR=https://hcvault-sandbox.llm-aws.com:8200 &&  # This should be your vault address
+      echo "VAULT_ADDR is set to $VAULT_ADDR" && # To check if VAULT_ADDR is set correctly
+      while true; do sleep 3600; done
+    resources:
+      limits:
+        cpu: "0.5"
+        memory: "600Mi"
+      requests:
+        cpu: "0.2"
+        memory: "300Mi"

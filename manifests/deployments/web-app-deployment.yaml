@@ -15,9 +15,9 @@ spec:
         vault.hashicorp.com/agent-inject: 'true' 
         vault.hashicorp.com/role: 'juan-vault-web-poc'  
         vault.hashicorp.com/agent-inject-status: 'update'  
-        vault.hashicorp.com/auth-path: 'auth/kubernetes'  
+        # vault.hashicorp.com/auth-path: 'auth/kubernetes'  
+        vault.hashicorp.com/auth-path: 'auth/docker-desktop'
         vault.hashicorp.com/namespace: 'default' 
-        # vault.hashicorp.com/agent-injector-tls-skip-verify: "true"
     spec:
       serviceAccountName: juan-vault-web-poc  
       containers:
@@ -31,7 +31,7 @@ spec:
             memory: "512Mi"
           requests:
             cpu: "500m"
-            memory: "256Mi"
+            memory: "356Mi"
         volumeMounts:
         - name: config-volume
           mountPath: /vault/configs

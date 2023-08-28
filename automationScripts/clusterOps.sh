@@ -7,12 +7,12 @@
 readonly yaml_files=(
     "../manifests/configmaps/nginx-proxy-configmap.yaml"
     "../manifests/configmaps/web-app-vault-template-configmap.yaml"
+    "../manifests/deployments/alpine-vault-deployment.yaml"
     "../manifests/deployments/nginx-proxy-deployment.yaml"
     "../manifests/deployments/web-app-deployment.yaml"
     "../manifests/loadbalancer/nginx-proxy-loadbalancer.yaml"
     "../manifests/service/nginx-proxy-service.yaml"
     "../manifests/service/web-app-service.yaml"
-    # "../manifests/secrets/vault-auth.yaml"
 )
 
 # Function to redeploy YAML files

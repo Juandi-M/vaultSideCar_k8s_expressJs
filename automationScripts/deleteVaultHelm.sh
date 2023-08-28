@@ -10,7 +10,7 @@ helm uninstall vault
 
 # Wait for a few seconds to make sure the release is deleted
 echo "Waiting for release to be deleted..."
-sleep 10
+sleep 5
 
 # Optionally, you can also delete the Helm repository if it is not going to be used further
 echo "Removing HashiCorp Helm repository..."

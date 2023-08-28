@@ -21,7 +21,7 @@ helm install vault hashicorp/vault \
 
 # Wait for a few seconds to make sure the injector pod is getting deployed
 echo "Waiting for injector pod to be deployed..."
-sleep 20
+sleep 6
 
 # Display all the pods in the default namespace
 echo "Displaying all pods in the default namespace..."
